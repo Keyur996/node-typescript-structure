@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>I-POINT | MAIL</title>
+	<link rel="preload" href="<%= SERVER_URL %>/build/electron.js/static/media/Biotif-Bold.f444e5fe53d3b9a8de35.woff"
+		as="font" type="font/woff2" crossorigin>
+	<style type="text/css">
+		@font-face {
+			font-family: 'Biotif-Bold';
+			src: url('<%= SERVER_URL %>/fonts/Biotif-Bold/Biotif-Bold.eot');
+			src: local('☺'), url('<%= SERVER_URL %>/fonts/Biotif-BlackItalic/Biotif-BlackItalic.woff') format('woff'),
+				url('<%= SERVER_URL %>/fonts/Biotif-BlackItalic/Biotif-BlackItalic.ttf') format('truetype'),
+				url('<%= SERVER_URL %>/fonts/Biotif-BlackItalic/Biotif-BlackItalic.svg') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'Biotif-Medium';
+			src: url('<%= SERVER_URL %>/fonts/Biotif-Medium/Biotif-Medium.eot');
+			src: local('☺'), url('<%= SERVER_URL %>/fonts/Biotif-Medium/Biotif-Medium.woff') format('woff'),
+				url('<%= SERVER_URL %>/fonts/Biotif-Medium/Biotif-Medium.ttf') format('truetype'),
+				url('<%= SERVER_URL %>/fonts/Biotif-Medium/Biotif-Medium.svg') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'Biotif-Regular';
+			src: url('<%= SERVER_URL %>/fonts/Biotif-Regular/Biotif-Regular.eot');
+			src: local('☺'), url('<%= SERVER_URL %>/fonts/Biotif-Regular/Biotif-Regular.woff') format('woff'),
+				url('<%= SERVER_URL %>/fonts/Biotif-Regular/Biotif-Regular.ttf') format('truetype'),
+				url('<%= SERVER_URL %>/fonts/Biotif-Regular/Biotif-Regular.svg') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: 'Biotif-SemiBold';
+			src: url('<%= SERVER_URL %>/fonts/Biotif-SemiBold/Biotif-SemiBold.eot');
+			src: local('☺'), url('<%= SERVER_URL %>/fonts/Biotif-SemiBold/Biotif-SemiBold.woff') format('woff'),
+				url('<%= SERVER_URL %>/fonts/Biotif-SemiBold/Biotif-SemiBold.ttf') format('truetype'),
+				url('<%= SERVER_URL %>/fonts/Biotif-SemiBold/Biotif-SemiBold.svg') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+	</style>
+</head>
+
+<body style="margin:0px;padding:0px;">
+	<table
+		style="width:100%;background-color:rgba(237, 237, 237,0.3);width:100%;background-image:url('https://i.ibb.co/BPY8Zr9/Rectangle-4267-2.png');padding-top:32px;background-repeat:repeat-x;padding-bottom:50px;">
+		<tr>
+			<td style="padding-bottom:32px;">
+				<div
+					style="width:85px;height:85px;border-radius:50%;margin:0px auto;background-color:#fff;display:flex;align-items:center;padding-left:5px;padding-bottom:5px;box-sizing:border-box;justify-content:center;">
+					<img style="width:40px;margin-left:20px;" src="<%= SERVER_URL %>/assets/svgs/signupLogo.svg" alt="">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table
+					style="width:548px;margin:0px auto;background-color:#FFFFFF;box-shadow: 5px 10px 20px rgba(222, 226, 230, 0.3);border-radius: 12px;padding-top:28px;padding-left:30px;padding-right:30px;">
+					<tr>
+						<td
+							style="color:#000000;font-size:24px;font-family: 'Biotif-Bold';text-align:center;padding-bottom:30px;width:100%;">
+							Welcome to iPoint!</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;width:100%;">
+							<img src="https://i.ibb.co/0JcF0X4/Group-18262.png" align=""
+								style="display:inline-block;width:285px;max-width:100%;margin:0px auto;" alt="" />
+						</td>
+					</tr>
+					<tr>
+						<% if(key==="verifyAccount" ){ %>
+							<td
+								style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:30px;font-family: 'Biotif-Regular';text-align:center;">
+								Hello <span style="font-family: 'Biotif-Medium';color:#000000;">
+									<%= userName %>
+								</span> You have been successfully registered in iPoint Express with <span
+									style="font-family: 'Biotif-Medium';color:#000000;">estherhoward@gmail.com</span>
+								We're excited to have you get started.</td>
+							<% } else { %>
+								<td
+									style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:30px;font-family: 'Biotif-Regular';text-align:center;">
+									Hello <span style="font-family: 'Biotif-Medium';color:#000000;">
+										<%= userName %>
+									</span> A request for a forgotten password has been made. To reset your password,
+									kindly click the link below.</td>
+								<% } %>
+					</tr>
+					<tr>
+						<td
+							style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:30px;font-family: 'Biotif-Regular';text-align:center;">
+							<%= helpText %>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;padding-bottom:35px;">
+							<a href="<%= link %>"
+								style="display:inline-block;height:48px;line-height:48px;text-align:center;width:285px;background-color:#1776BA;color:#ffffff;border-radius:12px;text-decoration:none;font-family: 'Biotif-SemiBold';">
+								<%= buttonLabel %>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td
+							style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:6px;font-family: 'Biotif-Regular';text-align:center;">
+							If the link doesn’t work, please visit this alternative link.</td>
+					</tr>
+					<tr>
+						<td style="padding-bottom:6px;text-align:center;padding-bottom:25px;"><a href=""
+								style="color:#2E3234;font-weight:400;font-size:18px;line-height:24px;font-family: 'Biotif-Regular';text-decoration:none;">www.ipointexpress.com/confirm-your-account/</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:100%;border-bottom:1px solid rgba(0,0,0,0.6);opacity:0.1;"></td>
+					</tr>
+					<tr>
+						<td style="padding-top:25px;">
+							<table style="width:222px;max-width:100%;margin:0px auto;">
+								<tr>
+									<td>
+										<a href="" />
+										<img src="https://i.ibb.co/1GwystN/Group-18665.png" alt="" />
+										</a>
+									</td>
+									<td>
+										<a href="" />
+										<img src="https://i.ibb.co/1GwystN/Group-18665.png" alt="" />
+										</a>
+									</td>
+									<td>
+										<a href="" />
+										<img src="https://i.ibb.co/1GwystN/Group-18665.png" alt="" />
+										</a>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td
+							style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:30px;font-family: 'Biotif-Regular';text-align:center;padding-top:20px;">
+							If you no longer wish to receive any email from us, please <a href="#"
+								style="color:#2E3234;text-decoration:none;">unsubscribe</a> from the mailing list.</td>
+					</tr>
+					<tr>
+						<td style="width:100%;border-bottom:1px solid rgba(0,0,0,0.6);opacity:0.1;"></td>
+					</tr>
+					<tr>
+						<td
+							style="color: rgba(0, 0, 0, 0.5);font-weight:400;font-size:18px;line-height:24px;padding-bottom:20px;font-family: 'Biotif-Regular';text-align:center;padding-top:20px;">
+							&copy; iPoint Express 2022</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

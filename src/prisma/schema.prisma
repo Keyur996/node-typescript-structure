@@ -1,0 +1,199 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex", "interactiveTransactions", "referentialIntegrity"]
+}
+
+enum status {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id                          Int                @id @default(autoincrement())
+  firstname                   String?
+  lastname                    String?
+  username                    String?
+  profile_image               String?
+  email                       String
+  phone                       String?
+  mobile                      String?
+  password                    String?
+  added_by                    Int?
+  added_by_id_relation        User?              @relation("added_by_user", fields: [added_by], references: [id])
+  added_by_id_relation_itself User[]             @relation("added_by_user")
+  birth_date                  DateTime?          @db.Date
+  website                     String?
+  fax                         String?
+  gender                      String?
+  address1                    String?
+  address2                    String?
+  city                        String?
+  state                       String?
+  country                     String?
+  zip                         String?
+  facebook                    String?
+  twitter                     String?
+  linkedin                    String?
+  is_owner                    Boolean            @default(false)
+  active                      status             @default(ACTIVE)
+  verified                    Boolean            @default(false)
+  last_login_time             DateTime?
+  report_to                   Int?
+  report_to_relation          User?              @relation("report_to_user", fields: [report_to], references: [id])
+  report_to_relation_itself   User[]             @relation("report_to_user")
+  apple_id                    String?
+  google_id                   String?
+  settings                    Json
+  created_at                  DateTime           @default(now())
+  updated_at                  DateTime           @updatedAt
+  is_deleted                  Boolean            @default(false)
+  deleted_at                  DateTime?
+  UserOrganization            UserOrganization[]
+  UserPlatform                UserPlatform[]
+  UserProfile                 UserProfile[]
+  owner_of                    Organization?
+
+  @@unique([username, is_deleted])
+  @@unique([email, is_deleted])
+  @@unique([apple_id, is_deleted])
+  @@unique([google_id, is_deleted])
+  @@map("users")
+}
+
+model Organization {
+  id                    Int                 @id @default(autoincrement())
+  uuid                  String
+  organization_category String?
+  name                  String?
+  email                 String?
+  organization_logo     String?
+  phone                 String?
+  mobile                String?
+  fax                   String?
+  website               String?
+  description           String?
+  address1              String?
+  address2              String?
+  city                  String?
+  state                 String?
+  country               String?
+  zip                   String?
+  settings              Json
+  owner_id              Int                 @unique
+  owner                 User                @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  created_at            DateTime            @default(now())
+  updated_at            DateTime            @updatedAt
+  is_deleted            Boolean             @default(false)
+  deleted_at            DateTime?
+  UserOrganization      UserOrganization[]
+  UserPlatForm          UserPlatform[]
+  Profile               Profile[]
+  UserProfile           UserProfile[]
+  ProfilePermission     ProfilePermission[]
+
+  @@unique([uuid, is_deleted])
+  @@map("organizations")
+}
+
+model UserOrganization {
+  user_id         Int
+  user            User         @relation(fields: [user_id], references: [id])
+  organization_id Int
+  organization    Organization @relation(fields: [organization_id], references: [id])
+
+  @@id([user_id, organization_id])
+  @@map(name: "users_organizations")
+}
+
+model Platform {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  status          status
+  UserPlatform    UserPlatform[]
+  PermissionGroup PermissionGroup[]
+
+  @@map("platforms")
+}
+
+model UserPlatform {
+  user_id         Int
+  user            User         @relation(fields: [user_id], references: [id])
+  platform_id     Int
+  platform        Platform     @relation(fields: [platform_id], references: [id])
+  organization_id Int
+  Organization    Organization @relation(fields: [organization_id], references: [id])
+
+  @@id([user_id, platform_id, organization_id])
+  @@map(name: "users_platforms")
+}
+
+model Profile {
+  id                Int                 @id @default(autoincrement())
+  organization_id   Int
+  organization      Organization        @relation(fields: [organization_id], references: [id])
+  name              String
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  is_deleted        Boolean             @default(false)
+  deleted_at        DateTime?
+  UserProfile       UserProfile[]
+  ProfilePermission ProfilePermission[]
+
+  @@unique([name, organization_id, is_deleted])
+  @@map("profiles")
+}
+
+model UserProfile {
+  user_id         Int
+  user            User         @relation(fields: [user_id], references: [id])
+  organization_id Int
+  organization    Organization @relation(fields: [organization_id], references: [id])
+  profile_id      Int
+  profile         Profile      @relation(fields: [profile_id], references: [id])
+
+  @@id([user_id, organization_id, profile_id])
+  @@map(name: "users_profiles")
+}
+
+model PermissionGroup {
+  id          Int          @id @default(autoincrement())
+  platform_id Int
+  name        String       @unique
+  status      status
+  platform    Platform     @relation(fields: [platform_id], references: [id])
+  Permission  Permission[]
+
+  @@map("permission_groups")
+}
+
+model Permission {
+  id                  Int                 @id @default(autoincrement())
+  permission_group_id Int
+  PermissionGroup     PermissionGroup     @relation(fields: [permission_group_id], references: [id])
+  name                String
+  status              status
+  ProfilePermission   ProfilePermission[]
+
+  @@map("permissions")
+}
+
+model ProfilePermission {
+  permission_id   Int
+  permission      Permission   @relation(fields: [permission_id], references: [id])
+  profile_id      Int
+  profile         Profile      @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  organization_id Int
+  organization    Organization @relation(fields: [organization_id], references: [id])
+  status          status
+
+  @@id([permission_id, profile_id, organization_id])
+  @@map(name: "profiles_permissions")
+}

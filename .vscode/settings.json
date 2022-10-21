@@ -1,0 +1,13 @@
+{
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": true
+  // },
+  // "editor.formatOnSave": false,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.wordWrap": "on",
+  // "diffEditor.wordWrap": "on",
+  // "[prisma]": {
+  //   "editor.defaultFormatter": "Prisma.prisma"
+  // },
+  // "editor.wordWrapColumn": 50
+}

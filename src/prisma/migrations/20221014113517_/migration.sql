@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "apple_id" SET DATA TYPE TEXT,
+ALTER COLUMN "google_id" SET DATA TYPE TEXT;
